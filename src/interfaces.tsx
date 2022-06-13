@@ -9,3 +9,10 @@ export interface IImage {
 export interface IImageWithFavorite extends IImage{
     isFavorite: boolean,
 }
+export interface FavoriteProp {
+    FavImage: boolean,
+}
+
+export interface TabProp {
+    TabNumber: boolean | number,
+}

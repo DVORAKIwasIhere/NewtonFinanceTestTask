@@ -1,33 +1,35 @@
 import { useEffect, useState } from "react";
 import { IImageWithFavorite } from "../../interfaces";
-import { Image } from "../ImageList/styles";
-
-interface ImageListProps{
-    imageAPI: IImageWithFavorite[]
+import * as S from "./styles"
+interface ImageListProps {
+  imageAPI: IImageWithFavorite[];
 }
 
-export const ImageList = ({imageAPI}: ImageListProps) => {
-    const [images, setImages] = useState<any[]>([])
+export const ImageList = ({ imageAPI }: ImageListProps) => {
+  const [images, setImages] = useState<any[]>([]);
 
-    useEffect(() => {
-        setImages(imageAPI)
-    },[imageAPI])
+  useEffect(() => {
+    setImages(imageAPI);
+  }, [imageAPI]);
 
-    const handleFavorite = (id: number) => {
+  const handleFavorite = (id: number) => {
     const newState = [...imageAPI];
     newState[id].isFavorite = !newState[id].isFavorite;
-    setImages(newState)
+    setImages(newState);
   };
   return (
     <>
       {images.map((image, index) => (
-        <Image
-          key={image.id}
-          onDoubleClick={() => handleFavorite(index)}
-          FavImage={image.isFavorite}
-          src={image.download_url}
-          alt="we are sorry, no picture here"
-        />
+        <S.Unity>
+          <S.Image
+            key={image.id}
+            onDoubleClick={() => handleFavorite(index)}
+            FavImage={image.isFavorite}
+            src={image.download_url}
+            alt="we are sorry, no picture here"
+          />
+          <S.Like FavImage={image.isFavorite}/>
+        </S.Unity>
       ))}
     </>
   );
